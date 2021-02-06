@@ -1,0 +1,1243 @@
+---
+swagger: "2.0"
+info:
+  description: "This module defines a common base data model for a collection\n  \
+    \      of nodes in a network.  Node definitions are further used\n        in network\
+    \ topologies and inventories.\n\n        Copyright (c) 2018 IETF Trust and the\
+    \ persons identified as\n        authors of the code.  All rights reserved.\n\n\
+    \        Redistribution and use in source and binary forms, with or\n        without\
+    \ modification, is permitted pursuant to, and subject\n        to the license\
+    \ terms contained in, the Simplified BSD License\n        set forth in Section\
+    \ 4.c of the IETF Trust's Legal Provisions\n        Relating to IETF Documents\n\
+    \        (https://trustee.ietf.org/license-info).\n\n        This version of this\
+    \ YANG module is part of RFC 8345;\n        see the RFC itself for full legal\
+    \ notices.,YANG data model for representing and managing network\n        slices.\n\
+    \n        Copyright (c) 2020 IETF Trust and the persons identified as\n      \
+    \  authors of the code.  All rights reserved.\n\n        Redistribution and use\
+    \ in source and binary forms, with or\n        without modification, is permitted\
+    \ pursuant to, and subject to\n        the license terms contained in, the Simplified\
+    \ BSD License set\n        forth in Section 4.c of the IETF Trust's Legal Provisions\n\
+    \        Relating to IETF Documents\n               (http://trustee.ietf.org/license-info).\n\
+    \n        This version of this YANG module is part of RFC XXXX; see the\n    \
+    \    RFC itself for full legal notices."
+  version: "1.0"
+  title: "ietf-network,ietf-network-slice API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/networks/:
+    get:
+      tags:
+      - "ietf-network"
+      summary: "returns ietf.network.Networks"
+      description: "Serves as a top-level container for a list of networks."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.network.Networks"
+          schema:
+            $ref: "#/definitions/ietf.network.NetworksWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-network"
+      summary: "creates ietf.network.Networks"
+      description: "Serves as a top-level container for a list of networks."
+      parameters:
+      - in: "body"
+        name: "ietf.network.Networks.body-param"
+        description: "ietf.network.Networks to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.NetworksWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-network"
+      summary: "creates or updates ietf.network.Networks"
+      description: "Serves as a top-level container for a list of networks."
+      parameters:
+      - in: "body"
+        name: "ietf.network.Networks.body-param"
+        description: "ietf.network.Networks to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.NetworksWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network"
+      summary: "removes ietf.network.Networks"
+      description: "Serves as a top-level container for a list of networks."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network/:
+    post:
+      tags:
+      - "ietf-network"
+      summary: "creates ietf.network.networks.Network"
+      description: "Describes a network.\n            A network typically contains\
+        \ an inventory of nodes,\n            topological information (augmented through\
+        \ the\n            network-topology data model), and layering information."
+      parameters:
+      - in: "body"
+        name: "ietf.network.networks.Network.body-param"
+        description: "ietf.network.networks.Network to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.NetworkWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/networks/network={network-id}/:
+    get:
+      tags:
+      - "ietf-network"
+      summary: "returns ietf.network.networks.Network"
+      description: "Describes a network.\n            A network typically contains\
+        \ an inventory of nodes,\n            topological information (augmented through\
+        \ the\n            network-topology data model), and layering information."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.networks.Network"
+          schema:
+            $ref: "#/definitions/ietf.network.networks.NetworkWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-network"
+      summary: "creates or updates ietf.network.networks.Network"
+      description: "Describes a network.\n            A network typically contains\
+        \ an inventory of nodes,\n            topological information (augmented through\
+        \ the\n            network-topology data model), and layering information."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.Network.body-param"
+        description: "ietf.network.networks.Network to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.NetworkWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network"
+      summary: "removes ietf.network.networks.Network"
+      description: "Describes a network.\n            A network typically contains\
+        \ an inventory of nodes,\n            topological information (augmented through\
+        \ the\n            network-topology data model), and layering information."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/network-slice/:
+    get:
+      tags:
+      - "ietf-network-slice"
+      summary: "returns ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+          schema:
+            $ref: "#/definitions/ietf.network.slice.networkslicetopologyattributes.NetworkSliceWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-network-slice"
+      summary: "creates ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.slice.networkslicetopologyattributes.NetworkSlice.body-param"
+        description: "ietf.network.slice.networkslicetopologyattributes.NetworkSlice\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.slice.networkslicetopologyattributes.NetworkSliceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-network-slice"
+      summary: "creates or updates ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.slice.networkslicetopologyattributes.NetworkSlice.body-param"
+        description: "ietf.network.slice.networkslicetopologyattributes.NetworkSlice\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.slice.networkslicetopologyattributes.NetworkSliceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network-slice"
+      summary: "removes ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/network-types/:
+    get:
+      tags:
+      - "ietf-network"
+      summary: "returns ietf.network.networks.network.NetworkTypes"
+      description: "Serves as an augmentation target.\n              The network type\
+        \ is indicated through corresponding\n              presence containers augmented\
+        \ into this container."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.networks.network.NetworkTypes"
+          schema:
+            $ref: "#/definitions/ietf.network.networks.network.NetworkTypesWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-network"
+      summary: "creates ietf.network.networks.network.NetworkTypes"
+      description: "Serves as an augmentation target.\n              The network type\
+        \ is indicated through corresponding\n              presence containers augmented\
+        \ into this container."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.NetworkTypes.body-param"
+        description: "ietf.network.networks.network.NetworkTypes to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.NetworkTypesWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-network"
+      summary: "creates or updates ietf.network.networks.network.NetworkTypes"
+      description: "Serves as an augmentation target.\n              The network type\
+        \ is indicated through corresponding\n              presence containers augmented\
+        \ into this container."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.NetworkTypes.body-param"
+        description: "ietf.network.networks.network.NetworkTypes to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.NetworkTypesWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network"
+      summary: "removes ietf.network.networks.network.NetworkTypes"
+      description: "Serves as an augmentation target.\n              The network type\
+        \ is indicated through corresponding\n              presence containers augmented\
+        \ into this container."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/network-types/network-slice/:
+    get:
+      tags:
+      - "ietf-network-slice"
+      summary: "returns ietf.network.slice.networks.network.networktypes.NetworkSlice"
+      description: "Its presence identifies the Network Slice type."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.slice.networks.network.networktypes.NetworkSlice"
+          schema:
+            $ref: "#/definitions/ietf.network.slice.networks.network.networktypes.NetworkSliceWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-network-slice"
+      summary: "creates ietf.network.slice.networks.network.networktypes.NetworkSlice"
+      description: "Its presence identifies the Network Slice type."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.slice.networks.network.networktypes.NetworkSlice.body-param"
+        description: "ietf.network.slice.networks.network.networktypes.NetworkSlice\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.slice.networks.network.networktypes.NetworkSliceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-network-slice"
+      summary: "creates or updates ietf.network.slice.networks.network.networktypes.NetworkSlice"
+      description: "Its presence identifies the Network Slice type."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.slice.networks.network.networktypes.NetworkSlice.body-param"
+        description: "ietf.network.slice.networks.network.networktypes.NetworkSlice\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.slice.networks.network.networktypes.NetworkSliceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network-slice"
+      summary: "removes ietf.network.slice.networks.network.networktypes.NetworkSlice"
+      description: "Its presence identifies the Network Slice type."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/node/:
+    post:
+      tags:
+      - "ietf-network"
+      summary: "creates ietf.network.networks.network.Node"
+      description: "The inventory of nodes of this network."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.Node.body-param"
+        description: "ietf.network.networks.network.Node to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.NodeWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/networks/network={network-id}/node={node-id}/:
+    get:
+      tags:
+      - "ietf-network"
+      summary: "returns ietf.network.networks.network.Node"
+      description: "The inventory of nodes of this network."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.networks.network.Node"
+          schema:
+            $ref: "#/definitions/ietf.network.networks.network.NodeWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-network"
+      summary: "creates or updates ietf.network.networks.network.Node"
+      description: "The inventory of nodes of this network."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.Node.body-param"
+        description: "ietf.network.networks.network.Node to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.NodeWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network"
+      summary: "removes ietf.network.networks.network.Node"
+      description: "The inventory of nodes of this network."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/node={node-id}/network-slice/:
+    get:
+      tags:
+      - "ietf-network-slice"
+      summary: "returns ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+          schema:
+            $ref: "#/definitions/ietf.network.slice.networkslicenodeattributes.NetworkSliceWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-network-slice"
+      summary: "creates ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.slice.networkslicenodeattributes.NetworkSlice.body-param"
+        description: "ietf.network.slice.networkslicenodeattributes.NetworkSlice to\
+          \ be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.slice.networkslicenodeattributes.NetworkSliceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-network-slice"
+      summary: "creates or updates ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.slice.networkslicenodeattributes.NetworkSlice.body-param"
+        description: "ietf.network.slice.networkslicenodeattributes.NetworkSlice to\
+          \ be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.slice.networkslicenodeattributes.NetworkSliceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network-slice"
+      summary: "removes ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+      description: "Containing Network Slice attributes."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/node={node-id}/supporting-node/:
+    post:
+      tags:
+      - "ietf-network"
+      summary: "creates ietf.network.networks.network.node.SupportingNode"
+      description: "Represents another node that is in an underlay network\n     \
+        \           and that supports this node.  Used to represent layering\n   \
+        \             structure."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.node.SupportingNode.body-param"
+        description: "ietf.network.networks.network.node.SupportingNode to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.node.SupportingNodeWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/networks/network={network-id}/node={node-id}/supporting-node={network-ref},{node-ref}/:
+    get:
+      tags:
+      - "ietf-network"
+      summary: "returns ietf.network.networks.network.node.SupportingNode"
+      description: "Represents another node that is in an underlay network\n     \
+        \           and that supports this node.  Used to represent layering\n   \
+        \             structure."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - name: "network-ref"
+        in: "path"
+        description: "Id of supporting-node"
+        required: true
+        type: "string"
+      - name: "node-ref"
+        in: "path"
+        description: "Id of supporting-node"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.networks.network.node.SupportingNode"
+          schema:
+            $ref: "#/definitions/ietf.network.networks.network.node.SupportingNodeWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-network"
+      summary: "creates or updates ietf.network.networks.network.node.SupportingNode"
+      description: "Represents another node that is in an underlay network\n     \
+        \           and that supports this node.  Used to represent layering\n   \
+        \             structure."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - name: "network-ref"
+        in: "path"
+        description: "Id of supporting-node"
+        required: true
+        type: "string"
+      - name: "node-ref"
+        in: "path"
+        description: "Id of supporting-node"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.node.SupportingNode.body-param"
+        description: "ietf.network.networks.network.node.SupportingNode to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.node.SupportingNodeWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network"
+      summary: "removes ietf.network.networks.network.node.SupportingNode"
+      description: "Represents another node that is in an underlay network\n     \
+        \           and that supports this node.  Used to represent layering\n   \
+        \             structure."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "node-id"
+        in: "path"
+        description: "Id of node"
+        required: true
+        type: "string"
+      - name: "network-ref"
+        in: "path"
+        description: "Id of supporting-node"
+        required: true
+        type: "string"
+      - name: "node-ref"
+        in: "path"
+        description: "Id of supporting-node"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/networks/network={network-id}/supporting-network/:
+    post:
+      tags:
+      - "ietf-network"
+      summary: "creates ietf.network.networks.network.SupportingNetwork"
+      description: "An underlay network, used to represent layered network\n     \
+        \         topologies."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.SupportingNetwork.body-param"
+        description: "ietf.network.networks.network.SupportingNetwork to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.SupportingNetworkWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/networks/network={network-id}/supporting-network={network-ref}/:
+    get:
+      tags:
+      - "ietf-network"
+      summary: "returns ietf.network.networks.network.SupportingNetwork"
+      description: "An underlay network, used to represent layered network\n     \
+        \         topologies."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "network-ref"
+        in: "path"
+        description: "Id of supporting-network"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.network.networks.network.SupportingNetwork"
+          schema:
+            $ref: "#/definitions/ietf.network.networks.network.SupportingNetworkWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-network"
+      summary: "creates or updates ietf.network.networks.network.SupportingNetwork"
+      description: "An underlay network, used to represent layered network\n     \
+        \         topologies."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "network-ref"
+        in: "path"
+        description: "Id of supporting-network"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.network.networks.network.SupportingNetwork.body-param"
+        description: "ietf.network.networks.network.SupportingNetwork to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.network.networks.network.SupportingNetworkWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-network"
+      summary: "removes ietf.network.networks.network.SupportingNetwork"
+      description: "An underlay network, used to represent layered network\n     \
+        \         topologies."
+      parameters:
+      - name: "network-id"
+        in: "path"
+        description: "Id of network"
+        required: true
+        type: "string"
+      - name: "network-ref"
+        in: "path"
+        description: "Id of supporting-network"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+definitions:
+  ietf.network.Networks:
+    type: "object"
+    properties:
+      network:
+        type: "array"
+        description: "Describes a network.\n            A network typically contains\
+          \ an inventory of nodes,\n            topological information (augmented\
+          \ through the\n            network-topology data model), and layering information."
+        items:
+          $ref: "#/definitions/ietf.network.networks.Network"
+  ietf.network.NetworksWrapper:
+    properties:
+      networks:
+        $ref: "#/definitions/ietf.network.Networks"
+  ietf.network.networks.Network:
+    allOf:
+    - $ref: "#/definitions/ietf.network.slice.NetworkAugmentation1"
+    - $ref: "#/definitions/ietf.network.topology.NetworkAugmentation2"
+    - type: "object"
+      properties:
+        node:
+          type: "array"
+          description: "The inventory of nodes of this network."
+          items:
+            $ref: "#/definitions/ietf.network.networks.network.Node"
+        supporting-network:
+          type: "array"
+          description: "An underlay network, used to represent layered network\n \
+            \             topologies."
+          items:
+            $ref: "#/definitions/ietf.network.networks.network.SupportingNetwork"
+        network-types:
+          description: "Serves as an augmentation target.\n              The network\
+            \ type is indicated through corresponding\n              presence containers\
+            \ augmented into this container."
+          $ref: "#/definitions/ietf.network.networks.network.NetworkTypes"
+        network-id:
+          type: "string"
+          description: "Identifies a network."
+      description: ""
+  ietf.network.networks.NetworkWrapper:
+    properties:
+      network:
+        $ref: "#/definitions/ietf.network.networks.Network"
+  ietf.network.networks.network.NetworkTypes:
+    allOf:
+    - $ref: "#/definitions/ietf.network.slice.NetworkTypesAugmentation1"
+    - type: "object"
+      description: ""
+  ietf.network.networks.network.NetworkTypesWrapper:
+    properties:
+      network-types:
+        $ref: "#/definitions/ietf.network.networks.network.NetworkTypes"
+  ietf.network.networks.network.Node:
+    allOf:
+    - $ref: "#/definitions/ietf.network.slice.NodeAugmentation1"
+    - $ref: "#/definitions/ietf.network.topology.NodeAugmentation2"
+    - type: "object"
+      properties:
+        node-id:
+          type: "string"
+          description: "Uniquely identifies a node within the containing\n       \
+            \         network."
+        supporting-node:
+          type: "array"
+          description: "Represents another node that is in an underlay network\n \
+            \               and that supports this node.  Used to represent layering\n\
+            \                structure."
+          items:
+            $ref: "#/definitions/ietf.network.networks.network.node.SupportingNode"
+      description: ""
+  ietf.network.networks.network.NodeWrapper:
+    properties:
+      node:
+        $ref: "#/definitions/ietf.network.networks.network.Node"
+  ietf.network.networks.network.SupportingNetwork:
+    type: "object"
+    properties:
+      network-ref:
+        type: "string"
+        description: "References the underlay network."
+        x-path: "/nw:networks/nw:network/nw:network-id"
+  ietf.network.networks.network.SupportingNetworkWrapper:
+    properties:
+      supporting-network:
+        $ref: "#/definitions/ietf.network.networks.network.SupportingNetwork"
+  ietf.network.networks.network.node.SupportingNode:
+    type: "object"
+    properties:
+      network-ref:
+        type: "string"
+        description: "References the underlay network of which the\n             \
+          \     underlay node is a part."
+        x-path: "../../../nw:supporting-network/nw:network-ref"
+      node-ref:
+        type: "string"
+        description: "References the underlay node itself."
+        x-path: "/nw:networks/nw:network/nw:node/nw:node-id"
+  ietf.network.networks.network.node.SupportingNodeWrapper:
+    properties:
+      supporting-node:
+        $ref: "#/definitions/ietf.network.networks.network.node.SupportingNode"
+  ietf.network.slice.LinkAugmentation1:
+    type: "object"
+    properties:
+      network-slice:
+        description: "Containing Network Slice attributes."
+        $ref: "#/definitions/ietf.network.slice.networkslicelinkattributes.NetworkSlice"
+    x-augmentation:
+      prefix: "ietf-network-slice"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-network-slice"
+  ietf.network.slice.NetworkAugmentation1:
+    type: "object"
+    properties:
+      network-slice:
+        description: "Containing Network Slice attributes."
+        $ref: "#/definitions/ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+    x-augmentation:
+      prefix: "ietf-network-slice"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-network-slice"
+  ietf.network.slice.NetworkTypesAugmentation1:
+    type: "object"
+    properties:
+      network-slice:
+        description: "Its presence identifies the Network Slice type."
+        $ref: "#/definitions/ietf.network.slice.networks.network.networktypes.NetworkSlice"
+    x-augmentation:
+      prefix: "ietf-network-slice"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-network-slice"
+  ietf.network.slice.NodeAugmentation1:
+    type: "object"
+    properties:
+      network-slice:
+        description: "Containing Network Slice attributes."
+        $ref: "#/definitions/ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+    x-augmentation:
+      prefix: "ietf-network-slice"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-network-slice"
+  ietf.network.slice.networks.network.networktypes.NetworkSlice:
+    type: "object"
+  ietf.network.slice.networks.network.networktypes.NetworkSliceWrapper:
+    properties:
+      network-slice:
+        $ref: "#/definitions/ietf.network.slice.networks.network.networktypes.NetworkSlice"
+  ietf.network.slice.networkslicelinkattributes.NetworkSlice:
+    type: "object"
+    properties:
+      isolation-level:
+        type: "string"
+        description: "A network slice instance may be fully or partly, logically\n\
+          \              and/or physically, isolated from another network slice\n\
+          \              instance. This attribute describes different types of\n \
+          \             isolation:"
+      periodicity:
+        type: "array"
+        description: "A list of periodicities supported by the network slice. REF:GSMA-NS-Template:\
+          \ Generic Network Slice Template,\n              Version 3.0."
+        items:
+          type: "integer"
+          format: "int32"
+      delay-tolerance:
+        type: "boolean"
+        description: "'true' if is not too critical how long it takes to deliver\n\
+          \              the amount of data. REF:GSMA-NS-Template: Generic Network\
+          \ Slice Template,\n              Version 3.0."
+        default: false
+  ietf.network.slice.networkslicenodeattributes.NetworkSlice:
+    type: "object"
+    properties:
+      isolation-level:
+        type: "string"
+        description: "A network slice instance may be fully or partly, logically\n\
+          \              and/or physically, isolated from another network slice\n\
+          \              instance. This attribute describes different types of\n \
+          \             isolation:"
+      storage-id:
+        type: "string"
+        description: "Reference to a storage instance specified in\n             \
+          \ a data model specifying the storage resources."
+      compute-node-id:
+        type: "string"
+        description: "Reference to a compute node instance specified in\n        \
+          \      a data model specifying the computing resources."
+  ietf.network.slice.networkslicenodeattributes.NetworkSliceWrapper:
+    properties:
+      network-slice:
+        $ref: "#/definitions/ietf.network.slice.networkslicenodeattributes.NetworkSlice"
+  ietf.network.slice.networkslicetopologyattributes.NetworkSlice:
+    type: "object"
+    properties:
+      isolation-level:
+        type: "string"
+        description: "A network slice instance may be fully or partly, logically\n\
+          \              and/or physically, isolated from another network slice\n\
+          \              instance. This attribute describes different types of\n \
+          \             isolation:"
+      periodicity:
+        type: "array"
+        description: "A list of periodicities supported by the network slice. REF:GSMA-NS-Template:\
+          \ Generic Network Slice Template,\n              Version 3.0."
+        items:
+          type: "integer"
+          format: "int32"
+      delay-tolerance:
+        type: "boolean"
+        description: "'true' if is not too critical how long it takes to deliver\n\
+          \              the amount of data. REF:GSMA-NS-Template: Generic Network\
+          \ Slice Template,\n              Version 3.0."
+        default: false
+      optimization-criterion:
+        type: "string"
+        description: "Optimization criterion applied to this topology."
+  ietf.network.slice.networkslicetopologyattributes.NetworkSliceWrapper:
+    properties:
+      network-slice:
+        $ref: "#/definitions/ietf.network.slice.networkslicetopologyattributes.NetworkSlice"
+  ietf.network.topology.NetworkAugmentation2:
+    type: "object"
+    properties:
+      link:
+        type: "array"
+        description: "A network link connects a local (source) node and\n        \
+          \    a remote (destination) node via a set of the respective\n         \
+          \   node's termination points.  It is possible to have several\n       \
+          \     links between the same source and destination nodes.\n           \
+          \ Likewise, a link could potentially be re-homed between\n            termination\
+          \ points.  Therefore, in order to ensure that we\n            would always\
+          \ know to distinguish between links, every link\n            is identified\
+          \ by a dedicated link identifier.  Note that a\n            link models\
+          \ a point-to-point link, not a multipoint link."
+        items:
+          $ref: "#/definitions/ietf.network.topology.networks.network.Link"
+    x-augmentation:
+      prefix: "ietf-network-topology"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-network-topology"
+  ietf.network.topology.NodeAugmentation2:
+    type: "object"
+    properties:
+      termination-point:
+        type: "array"
+        description: "A termination point can terminate a link.\n            Depending\
+          \ on the type of topology, a termination point\n            could, for example,\
+          \ refer to a port or an interface."
+        items:
+          $ref: "#/definitions/ietf.network.topology.networks.network.node.TerminationPoint"
+    x-augmentation:
+      prefix: "ietf-network-topology"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-network-topology"
+  ietf.network.topology.networks.network.Link:
+    allOf:
+    - $ref: "#/definitions/ietf.network.slice.LinkAugmentation1"
+    - type: "object"
+      properties:
+        destination:
+          description: "This container holds the logical destination of a\n      \
+            \        particular link."
+          $ref: "#/definitions/ietf.network.topology.networks.network.link.Destination"
+        link-id:
+          type: "string"
+          description: "The identifier of a link in the topology.\n              A\
+            \ link is specific to a topology to which it belongs."
+        source:
+          description: "This container holds the logical source of a particular\n\
+            \              link."
+          $ref: "#/definitions/ietf.network.topology.networks.network.link.Source"
+        supporting-link:
+          type: "array"
+          description: "Identifies the link or links on which this link depends."
+          items:
+            $ref: "#/definitions/ietf.network.topology.networks.network.link.SupportingLink"
+      description: ""
+  ietf.network.topology.networks.network.link.Destination:
+    type: "object"
+    properties:
+      dest-tp:
+        type: "string"
+        description: "This termination point is located within the\n             \
+          \   destination node and terminates the link."
+        x-path: "../../../nw:node[nw:node-id=current()/../dest-node]/termination-point/tp-id"
+      dest-node:
+        type: "string"
+        description: "Destination node identifier.  Must be in the same\n        \
+          \        network."
+        x-path: "../../../nw:node/nw:node-id"
+  ietf.network.topology.networks.network.link.Source:
+    type: "object"
+    properties:
+      source-node:
+        type: "string"
+        description: "Source node identifier.  Must be in the same topology."
+        x-path: "../../../nw:node/nw:node-id"
+      source-tp:
+        type: "string"
+        description: "This termination point is located within the source node\n \
+          \               and terminates the link."
+        x-path: "../../../nw:node[nw:node-id=current()/../source-node]/termination-point/tp-id"
+  ietf.network.topology.networks.network.link.SupportingLink:
+    type: "object"
+    properties:
+      link-ref:
+        type: "string"
+        description: "This leaf identifies a link that is a part\n               \
+          \ of this link's underlay.  Reference loops in which\n                a\
+          \ link identifies itself as its underlay, either\n                directly\
+          \ or transitively, are not allowed."
+        x-path: "/nw:networks/nw:network[nw:network-id=current()/../network-ref]/link/link-id"
+      network-ref:
+        type: "string"
+        description: "This leaf identifies in which underlay topology\n          \
+          \      the supporting link is present."
+        x-path: "../../../nw:supporting-network/nw:network-ref"
+  ietf.network.topology.networks.network.node.TerminationPoint:
+    type: "object"
+    properties:
+      tp-id:
+        type: "string"
+        description: "Termination point identifier."
+      supporting-termination-point:
+        type: "array"
+        description: "This list identifies any termination points on which a\n   \
+          \           given termination point depends or onto which it maps.\n   \
+          \           Those termination points will themselves be contained\n    \
+          \          in a supporting node.  This dependency information can be\n \
+          \             inferred from the dependencies between links.  Therefore,\n\
+          \              this item is not separately configurable.  Hence, no\n  \
+          \            corresponding constraint needs to be articulated.\n       \
+          \       The corresponding information is simply provided by the\n      \
+          \        implementing system."
+        items:
+          $ref: "#/definitions/ietf.network.topology.networks.network.node.terminationpoint.SupportingTerminationPoint"
+  ietf.network.topology.networks.network.node.terminationpoint.SupportingTerminationPoint:
+    type: "object"
+    properties:
+      tp-ref:
+        type: "string"
+        description: "Reference to the underlay node (the underlay node must\n   \
+          \             be in a different topology)."
+        x-path: "/nw:networks/nw:network[nw:network-id=current()/../network-ref]/nw:node[nw:node-id=current()/../node-ref]/termination-point/tp-id"
+      network-ref:
+        type: "string"
+        description: "This leaf identifies in which topology the\n               \
+          \ supporting termination point is present."
+        x-path: "../../../nw:supporting-node/nw:network-ref"
+      node-ref:
+        type: "string"
+        description: "This leaf identifies in which node the supporting\n        \
+          \        termination point is present."
+        x-path: "../../../nw:supporting-node/nw:node-ref"

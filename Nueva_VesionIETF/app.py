@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+
+import connexion
+
+if __name__ == '__main__':
+    app = connexion.App(__name__, specification_dir='./swagger/')
+    app.add_api('swagger.yaml', arguments={'title': 'This module defines a common base data model for a collection         of nodes in a network.  Node definitions are further used         in network topologies and inventories.          Copyright (c) 2018 IETF Trust and the persons identified as         authors of the code.  All rights reserved.          Redistribution and use in source and binary forms, with or         without modification, is permitted pursuant to, and subject         to the license terms contained in, the Simplified BSD License         set forth in Section 4.c of the IETF Trust&#39;s Legal Provisions         Relating to IETF Documents         (https://trustee.ietf.org/license-info).          This version of this YANG module is part of RFC 8345;         see the RFC itself for full legal notices.,YANG data model for representing and managing network         slices.          Copyright (c) 2020 IETF Trust and the persons identified as         authors of the code.  All rights reserved.          Redistribution and use in source and binary forms, with or         without modification, is permitted pursuant to, and subject to         the license terms contained in, the Simplified BSD License set         forth in Section 4.c of the IETF Trust&#39;s Legal Provisions         Relating to IETF Documents                (http://trustee.ietf.org/license-info).          This version of this YANG module is part of RFC XXXX; see the         RFC itself for full legal notices.'})
+    app.run(port=8080)

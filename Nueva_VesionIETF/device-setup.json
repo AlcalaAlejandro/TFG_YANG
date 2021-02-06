@@ -1,0 +1,55 @@
+{
+    "ietf-network:networks": {
+        "network": [
+            {
+                "network-id": "example-customized-blue-topology",
+                "network-types": {
+                    "ietf-network-slice:network-slice": {}
+                },
+                "node": [
+                    {
+                        "node-id": "DCSG-3",
+                        "ietf-network-slice:network-slice": {
+                            "isolation-level": "ietf-network-slice:physical-memory-isolation"
+                        },
+                        "ietf-network-topology:termination-point": [
+                            {
+                                "tp-id": "220"
+                            }
+                        ]
+                    },
+                    {
+                        "node-id": "DCSG-5",
+                        "ietf-network-slice:network-slice": {
+                            "isolation-level": "ietf-network-slice:physical-memory-isolation"
+                        },
+                        "ietf-network-topology:termination-point": [
+                            {
+                                "tp-id": "6"
+                            }
+                        ]
+                    }
+                ],
+                "ietf-network-topology:link": [
+                    {
+                        "link-id": "DCSG-3,220,,",
+                        "source": {
+                            "source-node": "VR1",
+                            "source-tp": "220"
+                        },
+                        "destination": {
+                            "dest-node": "DCSG-5",
+                            "dest-tp": "6"
+                        },
+                        "ietf-network-slice:network-slice": {
+                            "isolation-level": "ietf-network-slice:physical-memory-isolation"
+                        }
+                    }
+                ],
+                "ietf-network-slice:network-slice": {
+                    "isolation-level": "ietf-network-slice:physical-memory-isolation"
+                }
+            }
+        ]
+    }
+}
