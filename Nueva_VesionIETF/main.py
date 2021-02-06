@@ -1,5 +1,34 @@
 import API
 import json
+import random
+import hashlib
+import threading
+import time
+import Candidate
+
+def sendNetworkSlice(networkSlice):
+	while True:
+		h = hashlib.sha1()
+		h.update(json.dumps(networkSlice).encode("utf-8"))
+		print("Send to Candidate: Network-Slice:"+ h.hexdigest())
+		ret = API.post_network_slice(networkSlice)
+		#print("---- RESPUESTA DEL SERVIDOR POST ----")
+		#print(ret)
+		time_to_sleep = random.randint(1,2)
+		time.sleep(time_to_sleep)
+
+
+def getNetworkSlice():
+	while True:
+		if Candidate.getSizeOfCandidate() != 0:
+			ret = API.get_network_slice()
+			#print("---- RESPUESTA DEL SERVIDOR GET ----")
+			h = hashlib.sha1()
+			h.update(json.dumps(ret).encode("utf-8"))
+			print("Get Network Slice to Candidate:"+h.hexdigest())
+			#print(json.dumps(ret, indent = 4))
+			time_to_sleep = random.randint(1,5)
+			time.sleep(time_to_sleep)
 
 def main():
 
@@ -69,22 +98,28 @@ def main():
 		json.dump(networks, file, indent = 4)
 
 
+	hiloPost = threading.Thread(target=sendNetworkSlice, args=(networks,))
+	hiloGet = threading.Thread(target=getNetworkSlice)
+
+
+	hiloPost.start()
+	hiloGet.start()
 	# Hacemos la petición POST
-	ret = API.post_network_slice(networks)
-	print("---- RESPUESTA DEL SERVIDOR POST ----")
-	print(ret)
+	#ret = API.post_network_slice(networks)
+	#print("---- RESPUESTA DEL SERVIDOR POST ----")
+	#print(ret)
 	# Hacemos la petición GET
-	ret = API.get_network_slice()
-	print("---- RESPUESTA DEL SERVIDOR GET ----")
-	print(ret)
+	#ret = API.get_network_slice()
+	#print("---- RESPUESTA DEL SERVIDOR GET ----")
+	#print(json.dumps(ret, indent = 4))
 	# Hacemos la petición DELETE
-	ret = API.delete_network_slice()
-	print("---- RESPUESTA DEL SERVIDOR DELETE ----")
-	print(ret)
+	#ret = API.delete_network_slice()
+	#print("---- RESPUESTA DEL SERVIDOR DELETE ----")
+	#print(ret)
 	# Hacemos la petición GET
-	ret = API.get_network_slice()
-	print("---- RESPUESTA DEL SERVIDOR GET ----")
-	print(ret)
+	#ret = API.get_network_slice()
+	#print("---- RESPUESTA DEL SERVIDOR GET ----")
+	#print(ret)
 
 if __name__ == '__main__':
 	main()

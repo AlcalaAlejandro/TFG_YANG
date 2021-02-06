@@ -1,29 +1,31 @@
 from flask import request
-
+import Candidate
 
 networks = {}
 def data_networks_delete() -> str:
-    if networks != None:
-        networks.clear()
+    if Candidate.getSizeOfCandidate() == 0:
         return "Object deleted"
     else:
         return "Internal error", 204
         
 def data_networks_get() -> str:
-    if networks == None:
+    if Candidate.getSizeOfCandidate() < 0:
         return "Internal error", 400
-    elif networks == {}:
-        return networks, 200
+    elif Candidate.getSizeOfCandidate() == 0:
+        network = Candidate.getCandidate()
+        return network, 200
     else:
-        return networks['networks'], 200
+        network = Candidate.getCandidate()
+        return network, 200
 
 def data_networks_post(ietf_network_Networks_bodyParam = None) -> str:
     json = request.json
     if json == {}:
         return "Internal error", 400
     else:
-        networks['networks'] = json
-        return "Object created", 201
+        #networks['networks'] = json
+        Candidate.saveCandidate(json)
+        return "Object created.", 201
 
 def data_networks_put(ietf_network_Networks_bodyParam = None) -> str:
     return 'do some magic!'
