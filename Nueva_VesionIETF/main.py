@@ -5,6 +5,8 @@ import hashlib
 import threading
 import time
 import Candidate
+import Running
+import Network_Slice_Orchestrator as NSO
 
 def sendNetworkSlice(networkSlice):
 	while True:
@@ -12,20 +14,23 @@ def sendNetworkSlice(networkSlice):
 		h.update(json.dumps(networkSlice).encode("utf-8"))
 		print("Send to Candidate: Network-Slice:"+ h.hexdigest())
 		ret = API.post_network_slice(networkSlice)
+		if ret == "Object created." and Candidate.getSizeOfCandidate() != 0:
+			NSO.checkNetworkSlice()
 		#print("---- RESPUESTA DEL SERVIDOR POST ----")
 		#print(ret)
 		time_to_sleep = random.randint(1,2)
-		time.sleep(time_to_sleep)
+		time.sleep(10)
 
 
 def getNetworkSlice():
 	while True:
-		if Candidate.getSizeOfCandidate() != 0:
+		if Running.getSizeOfRunning() != 0:
 			ret = API.get_network_slice()
 			#print("---- RESPUESTA DEL SERVIDOR GET ----")
 			h = hashlib.sha1()
 			h.update(json.dumps(ret).encode("utf-8"))
 			print("Get Network Slice to Candidate:"+h.hexdigest())
+			print(ret)
 			#print(json.dumps(ret, indent = 4))
 			time_to_sleep = random.randint(1,5)
 			time.sleep(time_to_sleep)

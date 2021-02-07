@@ -1,5 +1,6 @@
 from flask import request
 import Candidate
+import Running
 
 networks = {}
 def data_networks_delete() -> str:
@@ -9,13 +10,13 @@ def data_networks_delete() -> str:
         return "Internal error", 204
         
 def data_networks_get() -> str:
-    if Candidate.getSizeOfCandidate() < 0:
+    if Running.getSizeOfRunning() < 0:
         return "Internal error", 400
-    elif Candidate.getSizeOfCandidate() == 0:
-        network = Candidate.getCandidate()
+    elif Running.getSizeOfRunning() == 0:
+        network = Running.getRunning()
         return network, 200
     else:
-        network = Candidate.getCandidate()
+        network = Running.getRunning()
         return network, 200
 
 def data_networks_post(ietf_network_Networks_bodyParam = None) -> str:
