@@ -1,0 +1,4 @@
+import Network_Slice_Orchestrator As NSO
+
+
+if __name__ == '__main__':
