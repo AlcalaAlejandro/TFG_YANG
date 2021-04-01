@@ -1,0 +1,16 @@
+{
+    "device_id": "220",
+    "va_log_level": "INFO",
+    "nevi_log_leve": "INFO",
+    "ports": [
+        {
+            "autoneg": false,
+            "mtu": 1500,
+            "admin_status": "up",
+            "ports": [
+                "10G",
+                "1G"
+            ]
+        }
+    ]
+}
