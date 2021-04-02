@@ -1,6 +1,5 @@
 from flask import request
 
-
 networks = {}
 def data_networks_delete() -> str:
     if networks != None:
